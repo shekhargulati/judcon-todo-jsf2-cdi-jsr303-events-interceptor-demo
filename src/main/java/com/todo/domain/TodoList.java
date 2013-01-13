@@ -16,6 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class TodoList {
@@ -24,8 +28,15 @@ public class TodoList {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull
+	@Size(min = 10, max = 20)
 	private String name;
 
+	@NotNull
+	@Email
+	private String email;
+
+	@NotNull
 	private Date createdOn = new Date();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -36,20 +47,19 @@ public class TodoList {
 	@ElementCollection
 	@CollectionTable(name = "Tags", joinColumns = @JoinColumn(name = "todolist_id"))
 	@Column(name = "tag")
+	@NotNull
 	private List<String> tags;
 
-	public TodoList(String name,List<Todo> todos,
-			List<String> tags) {
+	public TodoList(String name, List<Todo> todos, List<String> tags) {
 		super();
 		this.name = name;
 		this.todos = todos;
 		this.tags = tags;
 	}
-	
+
 	public TodoList() {
 		super();
 	}
-
 
 	public Long getId() {
 		return id;

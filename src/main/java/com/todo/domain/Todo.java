@@ -6,18 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Todo {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
+	@NotNull
+	@Size(min = 10, max = 40)
 	private String todo;
-	
+
+	@NotNull
 	private Date createdOn = new Date();
-	
 
 	public Todo(String todo) {
 		this.todo = todo;
@@ -25,7 +29,7 @@ public class Todo {
 
 	public Todo() {
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +58,5 @@ public class Todo {
 	public String toString() {
 		return "Todo [id=" + id + ", todo=" + todo + "]";
 	}
-	
-	
+
 }
