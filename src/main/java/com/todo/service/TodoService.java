@@ -21,6 +21,7 @@ public class TodoService {
 
 	public TodoList create(TodoList todoList) {
 		entityManager.persist(todoList);
+		todolistEvent.fire(todoList);
 		return todoList;
 	}
 
@@ -28,7 +29,6 @@ public class TodoService {
 		TodoList todoList = entityManager.find(TodoList.class, id);
 		List<String> tags = todoList.getTags();
 		System.out.println("Tags : " + tags);
-		todolistEvent.fire(todoList);
 		return todoList;
 	}
 
