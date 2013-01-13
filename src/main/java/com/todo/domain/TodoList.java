@@ -9,16 +9,17 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
-import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
@@ -39,15 +40,17 @@ public class TodoList {
 	@NotNull
 	private Date createdOn = new Date();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	@OrderColumn
 	@JoinColumn(name = "todolist_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Todo> todos = new ArrayList<Todo>();
 
 	@ElementCollection
 	@CollectionTable(name = "Tags", joinColumns = @JoinColumn(name = "todolist_id"))
 	@Column(name = "tag")
 	@NotNull
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<String> tags;
 
 	public TodoList(String name, List<Todo> todos, List<String> tags) {
