@@ -1,11 +1,14 @@
-package com.todo.domain;
+package com.todo.controller;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
+import com.todo.domain.TodoList;
 import com.todo.service.TodoService;
 
 @Model
@@ -13,9 +16,12 @@ public class TodoController {
 
 	@Inject
 	private TodoService todoService;
+	
 	@Inject
 	private FacesContext facesContext;
 	
+	@Produces
+	@Named
 	private TodoList newTodoList;
 	
 	@PostConstruct
