@@ -9,13 +9,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.todo.domain.TodoList;
-import com.todo.service.TodoService;
+import com.todo.service.TodoListService;
 
 @Model
 public class TodoController {
 
 	@Inject
-	private TodoService todoService;
+	private TodoListService todoService;
 	
 	@Inject
 	private FacesContext facesContext;

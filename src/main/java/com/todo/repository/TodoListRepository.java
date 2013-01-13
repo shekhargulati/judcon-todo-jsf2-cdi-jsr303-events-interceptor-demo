@@ -23,6 +23,11 @@ public class TodoListRepository {
         return em.createQuery(criteria).getResultList();
 	}
 
+	public TodoList findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
 

@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import com.todo.domain.TodoList;
 
 @Stateless
-public class TodoService {
+public class TodoListService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
